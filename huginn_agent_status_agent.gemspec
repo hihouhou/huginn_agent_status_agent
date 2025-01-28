@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "huginn_agent_status_agent"
-  spec.version       = '0.1.10'
+  spec.version       = '0.1.11'
   spec.authors       = ["Nicolas Germain"]
   spec.email         = ["ngermain@hihouhou.com"]
 
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir['spec/**/*.rb'].reject { |f| f[%r{^spec/huginn}] }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "bundler", ">= 2.1.0"
   spec.add_development_dependency "rake", "~> 12.3.3"
 
   spec.add_runtime_dependency "huginn_agent"
