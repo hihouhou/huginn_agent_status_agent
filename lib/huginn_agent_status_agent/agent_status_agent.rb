@@ -84,14 +84,13 @@ module Agents
 
 
       if interpolated['changes_only'] == 'true'
-        if payload.to_s != memory['last_status']
+        if payload != memory['last_status']
           if "#{memory['last_status']}" == ''
             payload.each do |agent|
               create_event payload: agent
             end
           else
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil,", ": null,")
-            last_status = JSON.parse(last_status)
+            last_status = memory['last_status']
             payload.each do |agent|
               found = false
               if interpolated['debug'] == 'true'
@@ -112,12 +111,14 @@ module Agents
               end
             end
           end
-          memory['last_status'] = payload.to_s
+          memory['last_status'] = payload
+        else
+          log "no diff"
         end
       else
         create_event payload: payload
-        if payload.to_s != memory['last_status']
-          memory['last_status'] = payload.to_s
+        if payload != memory['last_status']
+          memory['last_status'] = payload
         end
       end
     end
